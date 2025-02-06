@@ -1,0 +1,22 @@
+[
+    {
+        "name": "BlueBerries",
+        "Color": "Blue",
+        "quantity": 30
+    },
+    {
+        "name": "Strawberries",
+        "Color": "Red",
+        "quantity": 50
+    },
+    {
+        "name": "Bananas",
+        "Color": "Yellow",
+        "quantity": 15
+    },
+    {
+        "name": "Apples",
+        "Color": "Green",
+        "quantity": 25
+    }
+]
