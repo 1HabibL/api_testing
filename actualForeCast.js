@@ -80,17 +80,38 @@ function displayForeCast(fiveData){
 
 
 function displayForeCast2(fiveData) {
-    const FiveDayData = document.getElementById("FiveDayData")
-    fiveData.foreach((targetData, index) =>{
+    const FinalDayData = document.getElementById("FinalDayData");
+
+    const dailyForecasts = [];
+    const seenDates = new Set();
+
+fiveData.list.forEach((entry) => {
+    const date = entry.dt_txt.split(" ")[0];
+
+    if(!seenDates.has(date)) {
+        seenDates.add(date);
+        dailyForecasts.push(entry);
+    }
+});
+
+    
+
+dailyForecasts.forEach((targetData) =>{
+
         const forecastCard = document.createElement("div");
         forecastCard.classList.add("ForeCastCard");
-        forecastCard.textContent = `${fiveData.list[i].main.temp}`
-        FinalDayData.appendChild(forecastCard)
-    })
+
+        if (targetData.main && targetData.main.temp !== undefined) {
+            forecastCard.textContent = `${targetData.main.temp}`
+        } else {
+            forecastCard.textContent = "No data available";
+
+        }
+        FinalDayData.appendChild(forecastCard);
+    });
 }
 
 
 
 
-getWeather("Toronto")
 getWeather("Toronto")
