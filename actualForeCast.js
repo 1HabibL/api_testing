@@ -95,19 +95,68 @@ fiveData.list.forEach((entry) => {
 });
 
     
-
+const uniqueDays = new Set(); // Store unique day names
 dailyForecasts.forEach((targetData) =>{
 
         const forecastCard = document.createElement("div");
         forecastCard.classList.add("ForeCastCard");
 
+        //date if-statement
+        function getDayOfWeek(unixTimestamp){
+            const date = new Date(unixTimestamp * 1000);
+            const options = { weekday: 'long'};
+            return new Intl.DateTimeFormat('en-US', options).format(date)
+        }
+
+        const forecastDay = getDayOfWeek(targetData.dt);
+       
+
+     
+        
+        if (!uniqueDays.has(forecastDay)) { // If this day hasn't been added yet
+            uniqueDays.add(forecastDay); // Mark this day as added
+
+        const newforecastDay = document.createElement("p")
+        newforecastDay.textContent = `${forecastDay }`
+        console.log(newforecastDay.textContent)
+        forecastCard.appendChild(newforecastDay);
+
+    }
+        //main Temperature if-statement 
+        const newforecastTemp = document.createElement("p");
         if (targetData.main && targetData.main.temp !== undefined) {
-            forecastCard.textContent = `${targetData.main.temp}`
+            newforecastTemp.textContent = `${targetData.main.temp}`
+            
         } else {
-            forecastCard.textContent = "No data available";
+            newforecastTemp.textContent = "No data available";
+        }
+        forecastCard.appendChild(newforecastTemp);
+
+
+        //desciption if-statement
+        const newforecastDesc = document.createElement("p"); 
+        if (targetData.weather && targetData.weather[0].description !== undefined) {
+            newforecastDesc.textContent = `${targetData.weather[0].description}`
+        } else {
+            newforecastDesc.textContent = "No data available";
 
         }
+        forecastCard.appendChild(newforecastDesc)
+
+           //icon if-statement
+           const newforecastIcon = document.createElement("div"); 
+           if (targetData.weather && targetData.weather[0].icon !== undefined) {
+            const iconCode = targetData.weather[0].icon;
+               newforecastIcon.innerHTML = `${targetData.weather[0].icon}`
+               newforecastIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" alt="Weather icon">`
+           } else {
+               newforecastIcon.textContent = "No data available";
+           }
+           forecastCard.appendChild(newforecastIcon)
+   
+
         FinalDayData.appendChild(forecastCard);
+    
     });
 }
 

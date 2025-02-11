@@ -1,0 +1,12 @@
+.FinalDayData{
+    display: flex;
+    
+}
+
+
+.ForeCastCard{
+    background-color: plum;
+    height: 200px;
+    width: 76px;
+    margin: 5px;
+}
