@@ -10,3 +10,14 @@
     width: 76px;
     margin: 5px;
 }
+
+
+.sectionThreeData{
+    display: flex;
+    
+}
+
+.conditioning{
+    display: flex;
+    flex-direction: column;
+}
